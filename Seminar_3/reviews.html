@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reviews</title>
+</head>
+
+<body>
+    <div>
+        <h1>Отзывы на товары</h1>
+    </div>
+    <button><a href="index.html">Оставить отзыв на товар</a></button>
+    <div class="main-reviews">
+
+    </div>
+    <script>
+        const mainReviewsEl = document.querySelector('.main-reviews');
+        const titleProduct = JSON.parse(localStorage.getItem('PRODUCT_KEY'));
+        if (titleProduct !== null) {
+            titleProduct.forEach(element => {
+                const reviewsProduct = JSON.parse(localStorage.getItem(`${element.title}`));
+                mainReviewsEl.insertAdjacentHTML('beforeend', `<div id="${element.title}">
+                                                                    <h2>${element.title}</h2>
+                                                               </div>`);
+                const elementTitleEl = document.getElementById(element.title);
+                reviewsProduct.forEach(e => {
+                    elementTitleEl.insertAdjacentHTML('beforeend', `<ul>
+                                                                    <li>${e.reviews}</li>
+                                                               </ul>`)
+                })
+            });
+
+        };
+    </script>
+</body>
+
+</html>
